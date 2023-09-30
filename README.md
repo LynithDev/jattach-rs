@@ -1,6 +1,15 @@
 # jattach-rs
 Rust port of [jattach](https://github.com/jattach/jattach/)
 
+> [!IMPORTANT]
+> This is a work in progress and is not yet ready for use.
+
+## Supports
+| VM      | Windows  | Linux  | MacOS  |
+|---------|----------|--------|--------|
+| Hotspot | ❌       | ✅     | ❌     |
+| OpenJ9  | ❌       | ❌     | ❌     |
+
 ## Usage
 ```rs
 use std::error::Error;
