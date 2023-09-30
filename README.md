@@ -5,7 +5,7 @@ Rust port of [jattach](https://github.com/jattach/jattach/)
 ```rs
 use std::error::Error;
 
-use jattach_rs::{posix::attach_hotspot::HotspotVirtualMachine, VirtualMachine};
+use jattach_rs::{posix::HotspotVirtualMachine, VirtualMachine};
 
 fn main() -> Result<(), Box<dyn Error>> {
     let pid = 244680;
