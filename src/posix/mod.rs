@@ -11,7 +11,6 @@ pub struct HotspotVirtualMachine {
     stream: UnixStream
 }
 
-
 impl HotspotVirtualMachine {
     pub fn attach(pid: i32) -> Result<HotspotVirtualMachine, Box<dyn Error>> {
         let (my_uid, my_gid) = unsafe { 
@@ -72,7 +71,13 @@ impl VirtualMachine for HotspotVirtualMachine {
     fn load_agent(&mut self, agent_path: &str, agent_arguments: &str) -> Result<(), Box<dyn Error>> {
         let result = self.execute_command("load", ["instrument", "false", &format!("{}={}", agent_path, agent_arguments)])?;
 
-        if !result.trim().starts_with("0") {
+        let mut result = result.trim();
+
+        if result.starts_with("return code: ") {
+            result = result.split("return code: ").collect::<Vec<&str>>()[1];
+        }
+
+        if !result.starts_with("0") {
             return Err(format!("Could not load agent").into());
         }
 

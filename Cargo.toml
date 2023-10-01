@@ -3,5 +3,17 @@ name = "jattach-rs"
 version = "0.1.0"
 edition = "2021"
 
-[dependencies]
+[target.'cfg(any(target_os = "linux", target_os = "macos"))'.dependencies]
 libc = "0.2.148"
+
+[target.'cfg(windows)'.dependencies]
+windows = "0.51.1"
+
+[profile.release]
+strip = true
+opt-level = "z"
+lto = true
+codegen-units = 1
+panic = "abort"
+
+target_os = "windows"
